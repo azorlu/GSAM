@@ -1,0 +1,9 @@
+﻿@model IEnumerable<Player>
+
+@foreach (var p in Model)
+{
+    <div>
+        <h3>@p.FullName</h3>
+        <p>@p.CountryCode @p.Age</p>
+    </div>
+}

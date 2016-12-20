@@ -10,7 +10,7 @@ namespace GSAM.Models
         public int PlayerID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public char Gender { get; set; }
+        public bool Gender { get; set; }
         public DateTime? DateOfBirth { get; set; }
         public string CountryCode { get; set; }
 

@@ -8,14 +8,27 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using GSAM.Models;
+using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
 
 namespace GSAM
 {
     public class Startup
     {
+        IConfigurationRoot Configuration;
+
+        public Startup(IHostingEnvironment env)
+        {
+            Configuration = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json").Build();
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IPlayerRepository,FakePlayerRepository>();
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration["Data:GSAMData:ConnectionString"]));
+            services.AddTransient<IPlayerRepository, EFPlayerRepository>();
+
             services.AddMvc();
         }
 
@@ -36,6 +49,7 @@ namespace GSAM
                 name: "default",
                 template: "{controller=Player}/{action=List}/{id?}");
             });
+            SeedData.EnsurePopulated(app);
         }
     }
 }

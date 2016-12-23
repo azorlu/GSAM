@@ -45,6 +45,12 @@ namespace GSAM
             app.UseStatusCodePages();
             app.UseStaticFiles();
             app.UseMvc(routes => {
+
+                routes.MapRoute(
+                name: "pagination",
+                template: "Players/Page{page}",
+                defaults: new { Controller = "Player", action = "List" });
+
                 routes.MapRoute(
                 name: "default",
                 template: "{controller=Player}/{action=List}/{id?}");

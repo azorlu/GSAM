@@ -1,9 +1,11 @@
-﻿@model IEnumerable<Player>
+﻿@model PlayersListViewModel
 
-@foreach (var p in Model)
+@foreach (var p in Model.Players)
 {
     <div>
         <h3>@p.FullName</h3>
         <p>@p.CountryCode @p.Age</p>
     </div>
 }
+
+<div page-model="@Model.PagingInfo" page-action="List"></div>

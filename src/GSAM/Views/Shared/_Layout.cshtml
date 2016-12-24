@@ -3,11 +3,23 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
+    <link asp-href-include="lib/bootstrap/dist/css/*.min.css" rel="stylesheet" />
+    <title>Game, Set and Match</title>
 </head>
 <body>
-    <div>
-        @RenderBody()
+    <div class="navbar navbar-inverse" role="navigation">
+        <a class="navbar-brand" href="#">Game, Set and Match</a>
+    </div>
+    <div class="row panel">
+        <div id="categories" class="col-xs-3">
+            Tournaments
+        </div>
+        <div class="col-xs-6">
+            @RenderBody()
+        </div>
+        <div class="col-xs-3">
+            
+        </div>
     </div>
 </body>
 </html>

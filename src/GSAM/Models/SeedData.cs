@@ -13,6 +13,23 @@ namespace GSAM.Models
         {
             ApplicationDbContext context = app.ApplicationServices.GetRequiredService<ApplicationDbContext>();
 
+            #region SeedTournaments
+
+            if (!context.Tournaments.Any())
+            {
+                context.Tournaments.AddRange(
+                    new Tournament {  Name = "Wimbledon Championships", Category = "Grand Slam" }, 
+                    new Tournament {  Name = "French Open", Category = "Grand Slam" },
+                    new Tournament { Name = "US Open", Category = "Grand Slam" },
+                    new Tournament { Name = "Australian Open", Category = "Grand Slam" },
+                    new Tournament { Name = "Turbo Tennis", Category = "Exhibition" }
+                    );
+                context.SaveChanges();
+            }
+
+            #endregion
+
+            #region SeedPlayers
             if (!context.Players.Any())
             {
                 context.Players.AddRange(
@@ -50,7 +67,8 @@ namespace GSAM.Models
                      }
                     );
                 context.SaveChanges();
-            }
+            } 
+            #endregion
         }
     }
 }

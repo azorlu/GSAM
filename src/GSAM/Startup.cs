@@ -28,6 +28,7 @@ namespace GSAM
         {
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration["Data:GSAMData:ConnectionString"]));
             services.AddTransient<IPlayerRepository, EFPlayerRepository>();
+            services.AddTransient<ITournamentRepository, EFTournamentRepository>();
 
             services.AddMvc();
         }
@@ -46,14 +47,19 @@ namespace GSAM
             app.UseStaticFiles();
             app.UseMvc(routes => {
 
+               routes.MapRoute(
+               name: "tournaments",
+               template: "Tournaments/Page{page}",
+               defaults: new { Controller = "Tournament", action = "List" });
+
                 routes.MapRoute(
-                name: "pagination",
+                name: "players",
                 template: "Players/Page{page}",
                 defaults: new { Controller = "Player", action = "List" });
 
                 routes.MapRoute(
                 name: "default",
-                template: "{controller=Player}/{action=List}/{id?}");
+                template: "{controller=Tournament}/{action=List}/{id?}");
             });
             SeedData.EnsurePopulated(app);
         }

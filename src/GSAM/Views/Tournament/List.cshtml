@@ -1,4 +1,4 @@
-﻿@model PlayersListViewModel
+@model TournamentsListViewModel
 
 <div page-model="@Model.PagingInfo" page-action="List" page-classes-enabled="true"
      page-class="btn" page-class-normal="btn-default"
@@ -8,10 +8,12 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-6">
-            @foreach (var p in Model.Players)
+
+            @foreach (var t in Model.Tournaments)
             {
-                @Html.Partial("PlayerSummary", p)
+                @Html.Partial("TournamentSummary", t)
             }
+
         </div>
     </div>
 </div>

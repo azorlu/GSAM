@@ -29,12 +29,11 @@ namespace GSAM
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration["Data:GSAMData:ConnectionString"]));
             services.AddTransient<IPlayerRepository, EFPlayerRepository>();
             services.AddTransient<ITournamentRepository, EFTournamentRepository>();
-
             services.AddMvc();
         }
 
-        public void Configure(IApplicationBuilder app, 
-            IHostingEnvironment env, 
+        public void Configure(IApplicationBuilder app,
+            IHostingEnvironment env,
             ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole();
@@ -45,21 +44,31 @@ namespace GSAM
             }
             app.UseStatusCodePages();
             app.UseStaticFiles();
-            app.UseMvc(routes => {
-
-               routes.MapRoute(
-               name: "tournaments",
-               template: "Tournaments/Page{page}",
-               defaults: new { Controller = "Tournament", action = "List" });
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                name: null,
+                template: "{category}/Page{page:int}",
+                defaults: new { Controller = "Tournament", action = "List" });
 
                 routes.MapRoute(
-                name: "players",
-                template: "Players/Page{page}",
-                defaults: new { Controller = "Player", action = "List" });
+                name: null,
+                template: "Page{page:int}",
+                defaults: new { Controller = "Tournament", action = "List", page = 1 });
 
                 routes.MapRoute(
-                name: "default",
-                template: "{controller=Tournament}/{action=List}/{id?}");
+                name: null,
+                template: "{category}",
+                defaults: new { Controller = "Tournament", action = "List", page = 1 });
+
+                routes.MapRoute(
+               name: null,
+               template: "",
+               defaults: new { Controller = "Tournament", action = "List", page = 1 });
+
+                routes.MapRoute(
+               name: null,
+               template: "{controller}/{action}/{id?}");
             });
             SeedData.EnsurePopulated(app);
         }

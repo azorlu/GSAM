@@ -18,10 +18,11 @@ namespace GSAM.Controllers
             repository = repo;
         }
 
-        public ViewResult List(int page = 1) 
+        public ViewResult List(string category, int page = 1) 
             => View( new TournamentsListViewModel
             {
                 Tournaments = repository.Tournaments
+                .Where(t => category == null || t.Category == category)
                 .OrderBy(t => t.Name)
                 .Skip((page - 1) * PageSize)
                 .Take(PageSize),
@@ -29,8 +30,10 @@ namespace GSAM.Controllers
                 {
                     CurrentPage = page,
                     ItemsPerPage = PageSize,
-                    TotalItems = repository.Tournaments.Count()
-                }
+                    TotalItems = category == null ? repository.Tournaments.Count() 
+                        : repository.Tournaments.Where(e => e.Category == category).Count()
+                },
+                CurrentCategory = category
             });
 
     }

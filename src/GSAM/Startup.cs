@@ -29,6 +29,7 @@ namespace GSAM
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration["Data:GSAMData:ConnectionString"]));
             services.AddTransient<IPlayerRepository, EFPlayerRepository>();
             services.AddTransient<ITournamentRepository, EFTournamentRepository>();
+            services.AddTransient<ITournamentEventRepository, EFTournamentEventRepository>();
             services.AddMvc();
         }
 

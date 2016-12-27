@@ -49,6 +49,38 @@ namespace GSAM.Migrations
 
                     b.ToTable("Tournaments");
                 });
+
+            modelBuilder.Entity("GSAM.Models.TournamentEvent", b =>
+                {
+                    b.Property<int>("TournamentEventID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("CourtSurfaceType");
+
+                    b.Property<DateTime>("EndDate");
+
+                    b.Property<int>("MatchType");
+
+                    b.Property<string>("Name");
+
+                    b.Property<DateTime>("StartDate");
+
+                    b.Property<int>("TournamentID");
+
+                    b.HasKey("TournamentEventID");
+
+                    b.HasIndex("TournamentID");
+
+                    b.ToTable("TournamentEvents");
+                });
+
+            modelBuilder.Entity("GSAM.Models.TournamentEvent", b =>
+                {
+                    b.HasOne("GSAM.Models.Tournament", "Tournament")
+                        .WithMany("TournamentEvents")
+                        .HasForeignKey("TournamentID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
         }
     }
 }

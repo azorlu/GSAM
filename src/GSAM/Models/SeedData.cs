@@ -13,7 +13,7 @@ namespace GSAM.Models
         {
             ApplicationDbContext context = app.ApplicationServices.GetRequiredService<ApplicationDbContext>();
 
-            #region SeedTournaments
+            #region Seed Tournaments
 
             if (!context.Tournaments.Any())
             {
@@ -29,7 +29,35 @@ namespace GSAM.Models
 
             #endregion
 
-            #region SeedPlayers
+            #region Seed Tournament Events
+
+            if (!context.TournamentEvents.Any())
+            {
+                context.TournamentEvents.AddRange(
+                    new TournamentEvent {
+                        TournamentID = 1,
+                        Name = "Wimbledon Championships – Men's Singles",
+                        StartDate = new DateTime(1980, 6, 1),
+                        EndDate = new DateTime(1980, 6, 23),
+                        CourtSurfaceType = CourtSurfaceType.Grass,
+                        MatchType = MatchType.MensSingles
+                    },
+                     new TournamentEvent
+                     {
+                         TournamentID = 1,
+                         Name = "Wimbledon Championships – Men's Doubles",
+                         StartDate = new DateTime(1980, 6, 1),
+                         EndDate = new DateTime(1980, 6, 23),
+                         CourtSurfaceType = CourtSurfaceType.Grass,
+                         MatchType = MatchType.MensDoubles
+                     }
+                    );
+                context.SaveChanges();
+            }
+
+            #endregion
+
+            #region Seed Players
             if (!context.Players.Any())
             {
                 context.Players.AddRange(

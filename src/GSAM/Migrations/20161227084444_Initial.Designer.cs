@@ -8,8 +8,8 @@ using GSAM.Models;
 namespace GSAM.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20161225042519_AddTournamentTable")]
-    partial class AddTournamentTable
+    [Migration("20161227084444_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -49,6 +49,38 @@ namespace GSAM.Migrations
                     b.HasKey("TournamentID");
 
                     b.ToTable("Tournaments");
+                });
+
+            modelBuilder.Entity("GSAM.Models.TournamentEvent", b =>
+                {
+                    b.Property<int>("TournamentEventID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("CourtSurfaceType");
+
+                    b.Property<DateTime>("EndDate");
+
+                    b.Property<int>("MatchType");
+
+                    b.Property<string>("Name");
+
+                    b.Property<DateTime>("StartDate");
+
+                    b.Property<int>("TournamentID");
+
+                    b.HasKey("TournamentEventID");
+
+                    b.HasIndex("TournamentID");
+
+                    b.ToTable("TournamentEvents");
+                });
+
+            modelBuilder.Entity("GSAM.Models.TournamentEvent", b =>
+                {
+                    b.HasOne("GSAM.Models.Tournament", "Tournament")
+                        .WithMany("TournamentEvents")
+                        .HasForeignKey("TournamentID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
         }
     }

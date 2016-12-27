@@ -7,4 +7,9 @@
             @Model.Category
         </span>
     </h3>
+    @foreach (var te in Model.TournamentEvents)
+    {
+        @Html.Partial("TournamentEventSummary", te)
+    }
+
 </div>

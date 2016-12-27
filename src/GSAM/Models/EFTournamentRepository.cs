@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,6 +13,6 @@ namespace GSAM.Models
         {
             context = adc;
         }
-        public IEnumerable<Tournament> Tournaments => context.Tournaments;
+        public IEnumerable<Tournament> Tournaments => context.Tournaments.Include(t => t.TournamentEvents);
     }
 }

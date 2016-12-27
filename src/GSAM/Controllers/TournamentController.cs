@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using GSAM.Models;
 using GSAM.Models.ViewModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace GSAM.Controllers
 {

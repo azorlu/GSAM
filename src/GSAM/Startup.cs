@@ -69,6 +69,10 @@ namespace GSAM
 
                 routes.MapRoute(
                name: null,
+               template: "Admin/{controller}/{action}/{id?}");
+
+                routes.MapRoute(
+               name: null,
                template: "{controller}/{action}/{id?}");
             });
             SeedData.EnsurePopulated(app);

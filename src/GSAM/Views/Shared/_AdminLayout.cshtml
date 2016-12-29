@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link asp-href-include="lib/bootstrap/dist/css/*.min.css" rel="stylesheet" />
+    <title>Administration</title>
+</head>
+<body>
+    <div class="navbar navbar-inverse" role="navigation">
+        <a class="navbar-brand" href="#">@ViewBag.Title</a>
+    </div>
+    <div class="row panel">
+        <div id="categories" class="col-xs-2">
+            Add Tournament<br />
+            Add Event<br /> 
+            Add Player<br />
+        </div>
+        <div class="col-xs-8">
+            @RenderBody()
+        </div>
+        <div class="col-xs-2">
+            
+        </div>
+    </div>
+</body>
+</html>

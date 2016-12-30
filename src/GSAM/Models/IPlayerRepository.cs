@@ -8,5 +8,6 @@ namespace GSAM.Models
     public interface IPlayerRepository
     {
         IEnumerable<Player> Players { get; }
+        void SavePlayer(Player player);
     }
 }

@@ -11,22 +11,23 @@ namespace GSAM.Models
     {
         [DisplayName("Player ID")]
         public int PlayerID { get; set; }
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter player's first name.")]
         [DisplayName("First Name")]
         [StringLength(100)]
         public string FirstName { get; set; }
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter player's last name.")]
         [DisplayName("Last Name")]
         [StringLength(100)]
         public string LastName { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please specify player's gender.")]
         public bool Gender { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayName("Date of Birth")]
         public DateTime? DateOfBirth { get; set; }
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please select player's country.")]
         [DisplayName("Country")]
+        [StringLength(3)]
         public string CountryCode { get; set; }
 
         public string FullName => $"{FirstName} {LastName}";

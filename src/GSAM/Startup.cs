@@ -31,6 +31,11 @@ namespace GSAM
             services.AddTransient<ITournamentRepository, EFTournamentRepository>();
             services.AddTransient<ITournamentEventRepository, EFTournamentEventRepository>();
             services.AddMvc();
+            services.AddMemoryCache();
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.CookieName = ".GSAM";
+            });
         }
 
         public void Configure(IApplicationBuilder app,
@@ -45,6 +50,7 @@ namespace GSAM
             }
             app.UseStatusCodePages();
             app.UseStaticFiles();
+            app.UseSession();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

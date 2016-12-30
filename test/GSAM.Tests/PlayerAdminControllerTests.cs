@@ -8,6 +8,7 @@ using Xunit;
 using Moq;
 using GSAM.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace GSAM.Tests
 {
@@ -68,6 +69,48 @@ namespace GSAM.Tests
             Player player100 = GetViewModel<Player>(playerAdminController.Edit(100));
 
             Assert.Null(player100);
+        }
+
+        [Fact]
+        public void Can_Save_Valid_Changes()
+        {
+            
+            Mock<IPlayerRepository> mock = new Mock<IPlayerRepository>();
+            
+            Mock<ITempDataDictionary> tempData = new Mock<ITempDataDictionary>();
+           
+            PlayerAdminController target = new PlayerAdminController(mock.Object)
+            {
+                TempData = tempData.Object
+            };
+            
+            Player player = new Player { FirstName = "Test" };
+            
+            IActionResult result = target.Edit(player);
+            
+            mock.Verify(m => m.SavePlayer(player));
+            
+            Assert.IsType<RedirectToActionResult>(result);
+            Assert.Equal("List", (result as RedirectToActionResult).ActionName);
+        }
+
+        [Fact]
+        public void Cannot_Save_Invalid_Changes()
+        {
+            
+            Mock<IPlayerRepository> mock = new Mock<IPlayerRepository>();
+            
+            PlayerAdminController target = new PlayerAdminController(mock.Object);
+            
+            Player player = new Player { FirstName = "Test" };
+           
+            target.ModelState.AddModelError("error", "error");
+            
+            IActionResult result = target.Edit(player);
+           
+            mock.Verify(m => m.SavePlayer(It.IsAny<Player>()), Times.Never());
+           
+            Assert.IsType<ViewResult>(result);
         }
 
     }

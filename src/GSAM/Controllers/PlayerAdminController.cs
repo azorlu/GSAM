@@ -33,7 +33,25 @@ namespace GSAM.Controllers
                }
            });
 
+        [HttpGet]
         public ViewResult Edit(int playerID) 
             => View(repository.Players.FirstOrDefault(p => p.PlayerID == playerID));
+
+        [HttpPost]
+        public IActionResult Edit(Player player)
+        {
+            if (ModelState.IsValid)
+            {
+                repository.SavePlayer(player);
+                TempData["message"] = $"{player.FullName} has been saved to database.";
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return View(player);
+            }
+        }
+
+        public ViewResult Create() => View("Edit", new Player());
     }
 }

@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using GSAM.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace GSAM
 {
@@ -27,6 +28,8 @@ namespace GSAM
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration["Data:GSAMData:ConnectionString"]));
+            services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(Configuration["Data:GSAMData:ConnectionString"]));
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>();
             services.AddTransient<IPlayerRepository, EFPlayerRepository>();
             services.AddTransient<ITournamentRepository, EFTournamentRepository>();
             services.AddTransient<ITournamentEventRepository, EFTournamentEventRepository>();
@@ -51,6 +54,7 @@ namespace GSAM
             app.UseStatusCodePages();
             app.UseStaticFiles();
             app.UseSession();
+            app.UseIdentity();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -82,6 +86,7 @@ namespace GSAM
                template: "{controller}/{action}/{id?}");
             });
             SeedData.EnsurePopulated(app);
+            IdentitySeedData.EnsurePopulated(app);
         }
     }
 }

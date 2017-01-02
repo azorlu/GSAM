@@ -1,5 +1,6 @@
 ﻿using GSAM.Models;
 using GSAM.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace GSAM.Controllers
 {
+    [Authorize]
     public class PlayerAdminController : Controller
     {
         private IPlayerRepository repository;

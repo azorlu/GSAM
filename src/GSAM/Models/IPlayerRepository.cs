@@ -9,5 +9,6 @@ namespace GSAM.Models
     {
         IEnumerable<Player> Players { get; }
         void SavePlayer(Player player);
+        Player DeletePlayer(int playerID);
     }
 }

@@ -53,5 +53,16 @@ namespace GSAM.Controllers
         }
 
         public ViewResult Create() => View("Edit", new Player());
+
+        [HttpPost]
+        public IActionResult Delete(int playerID)
+        {
+            Player deletedPlayer = repository.DeletePlayer(playerID);
+            if (deletedPlayer != null)
+            {
+                TempData["message"] = $"{deletedPlayer.FullName} has been deleted.";
+            }
+            return RedirectToAction("List");
+        }
     }
 }

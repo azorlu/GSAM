@@ -113,5 +113,19 @@ namespace GSAM.Tests
             Assert.IsType<ViewResult>(result);
         }
 
+        public void Can_Delete_Player()
+        {
+            Player p = new Player { PlayerID = 1, FirstName = "Amelia", LastName = "Berry", Gender = false, CountryCode = "UK", DateOfBirth = new DateTime(1990, 1, 15) };
+
+            Mock<IPlayerRepository> mock = new Mock<IPlayerRepository>();
+            mock.Setup(m => m.Players).Returns(new Player[] { p });
+
+            PlayerAdminController target = new PlayerAdminController(mock.Object);
+
+            target.Delete(p.PlayerID);
+
+            mock.Verify(m => m.DeletePlayer(p.PlayerID));
+        }
+
     }
 }

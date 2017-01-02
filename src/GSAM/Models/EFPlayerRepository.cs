@@ -14,6 +14,17 @@ namespace GSAM.Models
         }
         public IEnumerable<Player> Players => context.Players;
 
+        public Player DeletePlayer(int playerID)
+        {
+            Player dbEntry = context.Players.FirstOrDefault(p => p.PlayerID == playerID);
+            if (dbEntry != null)
+            {
+                context.Players.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
+        }
+
         public void SavePlayer(Player player)
         {
             if (player.PlayerID == 0)

@@ -19,28 +19,31 @@
 <body>
     <div class="navbar navbar-inverse" role="navigation">
         <a class="navbar-brand" href="#">Administration</a>
-        <a class="btn btn-sm btn-primary pull-right"
-           asp-action="Logout" asp-controller="Account">Logout</a>
+        <a class="btn btn-sm btn-primary" asp-action="List" asp-controller="Tournament">Home</a>
+        <a class="btn btn-sm btn-danger" asp-action="Logout" asp-controller="Account">Logout</a>
+    </div>
+
+    <div class="row panel">
+        <div class="col-xs-2"></div>
+        <div class="col-xs-8">
+            <a href="#" class="btn btn-info">Tournament Administration</a> 
+            <a href="#" class="btn btn-info">Event Administration</a> 
+            <a asp-action="List" asp-controller="PlayerAdmin" class="btn btn-info">Player Administration</a>
+        </div>
     </div>
     <div class="row panel">
-        <div id="categories" class="col-xs-2">
-            Add Tournament<br />
-            Add Event<br /> 
-            Add Player<br />
-        </div>
-        <div class="col-xs-8 panel panel-default">
-            <div class="panel-heading"><h4>@ViewBag.Title</h4></div>
-            <div class="panel-body">
-                @if (TempData["message"] != null)
-                {
-                    <div class="alert alert-success">@TempData["message"]</div>
-                }
-                @RenderBody()
+        <div class="col-xs-2"></div>
+            <div class="col-xs-8 panel panel-default">
+                <div class="panel-heading"><h4>@ViewBag.Title</h4></div>
+                <div class="panel-body">
+                    @if (TempData["message"] != null)
+                    {
+                        <div class="alert alert-success">@TempData["message"]</div>
+                    }
+                    @RenderBody()
+                </div>
             </div>
         </div>
-        <div class="col-xs-2">
-            
-        </div>
-    </div>
+
 </body>
 </html>

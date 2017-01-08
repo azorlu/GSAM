@@ -9,5 +9,8 @@ namespace GSAM.Models
     {
         IEnumerable<Tournament> Tournaments { get; }
 
+        void SaveTournament(Tournament tournament);
+        Tournament DeleteTournament(int tournamentID);
+
     }
 }

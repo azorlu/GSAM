@@ -1,0 +1,52 @@
+﻿@model TournamentEvent
+@{
+    ViewBag.Title = "Edit Tournament Event";
+    Layout = "_AdminLayout";
+}
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="TournamentEventID" />
+    <div class="form-group">
+        <label asp-for="Tournament.Name"></label>
+        <select asp-for="TournamentID" asp-items="@ViewBag.TournamentsList">
+            <option>Please select tournament</option>
+        </select>
+        <div><span asp-validation-for="TournamentID" class="text-danger"></span></div>
+    </div>
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <div><span asp-validation-for="Name" class="text-danger"></span></div>
+        <input asp-for="Name" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="CourtSurfaceType"></label>
+        <div><span asp-validation-for="CourtSurfaceType" class="text-danger"></span></div>
+        <select asp-for="CourtSurfaceType"
+                asp-items="Html.GetEnumSelectList<CourtSurfaceType>()"
+                class="form-control">
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="MatchType"></label>
+        <div><span asp-validation-for="MatchType" class="text-danger"></span></div>
+        <select asp-for="MatchType"
+                asp-items="Html.GetEnumSelectList<MatchType>()"
+                class="form-control"></select>
+    </div>
+    <div class="form-group">
+        <label asp-for="StartDate"></label>
+        <div><span asp-validation-for="StartDate" class="text-danger"></span></div>
+        <input asp-for="StartDate" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="EndDate"></label>
+        <div><span asp-validation-for="EndDate" class="text-danger"></span></div>
+        <input asp-for="EndDate" class="form-control" />
+    </div>
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">Save</button>
+        <a asp-action="List" class="btn btn-default">Cancel</a>
+    </div>
+</form>
+
+

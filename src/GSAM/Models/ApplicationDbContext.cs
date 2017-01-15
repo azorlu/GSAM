@@ -15,5 +15,7 @@ namespace GSAM.Models
 
         public DbSet<TournamentEvent> TournamentEvents { get; set; }
 
+        public DbSet<Competitor> Competitors { get; set; }
+
     }
 }

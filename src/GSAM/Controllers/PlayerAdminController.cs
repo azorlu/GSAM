@@ -37,7 +37,7 @@ namespace GSAM.Controllers
 
         [HttpGet]
         public ViewResult Edit(int playerID) 
-            => View(repository.Players.FirstOrDefault(p => p.PlayerID == playerID));
+            => View(repository.FindPlayerByID(playerID));
 
         [HttpPost]
         public IActionResult Edit(Player player)

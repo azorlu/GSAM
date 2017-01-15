@@ -52,12 +52,16 @@ namespace GSAM.Tests
         [Fact]
         public void Can_Edit_Player()
         {
-            PlayerAdminController playerAdminController = new PlayerAdminController(GetRepositoryStub());
-            playerAdminController.PageSize = 8;
+            Player p = new Player { PlayerID = 1, FirstName = "Amelia", LastName = "Berry", Gender = false, CountryCode = "UK", DateOfBirth = new DateTime(1990, 1, 15) };
 
-            Player player1 = GetViewModel<Player>(playerAdminController.Edit(1));
+            Mock<IPlayerRepository> mock = new Mock<IPlayerRepository>();
+            mock.Setup(m => m.Players).Returns(new Player[] { p });
 
-            Assert.Equal(1, player1.PlayerID);
+            PlayerAdminController target = new PlayerAdminController(mock.Object);
+
+            target.Edit(p.PlayerID);
+
+            mock.Verify(m => m.FindPlayerByID(p.PlayerID));
         }
 
         [Fact]

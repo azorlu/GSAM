@@ -43,5 +43,8 @@ namespace GSAM.Models
         [ForeignKey("TournamentID")]
         public Tournament Tournament { get; set; }
 
+        [InverseProperty("TournamentEvent")]
+        public List<Competitor> Competitors { get; set; }
+
     }
 }

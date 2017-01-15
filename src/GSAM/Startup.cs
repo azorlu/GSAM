@@ -33,6 +33,7 @@ namespace GSAM
             services.AddTransient<IPlayerRepository, EFPlayerRepository>();
             services.AddTransient<ITournamentRepository, EFTournamentRepository>();
             services.AddTransient<ITournamentEventRepository, EFTournamentEventRepository>();
+            services.AddTransient<ICompetitorRepository, EFCompetitorRepository>();
             services.AddMvc();
             services.AddMemoryCache();
             services.AddSession(options => {

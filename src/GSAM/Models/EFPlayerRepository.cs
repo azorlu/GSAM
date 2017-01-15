@@ -16,13 +16,20 @@ namespace GSAM.Models
 
         public Player DeletePlayer(int playerID)
         {
-            Player dbEntry = context.Players.FirstOrDefault(p => p.PlayerID == playerID);
+            Player dbEntry = FindPlayerByID(playerID);
             if (dbEntry != null)
             {
                 context.Players.Remove(dbEntry);
                 context.SaveChanges();
             }
             return dbEntry;
+        }
+
+        public Player FindPlayerByID(int playerID)
+        {
+            Player dbPlayer = context.Players.FirstOrDefault(p => p.PlayerID == playerID);
+
+            return dbPlayer;
         }
 
         public void SavePlayer(Player player)
@@ -33,7 +40,7 @@ namespace GSAM.Models
             }
             else
             {
-                Player dbPlayer = context.Players.FirstOrDefault(p => p.PlayerID == player.PlayerID);
+                Player dbPlayer = FindPlayerByID(player.PlayerID);
                 if (dbPlayer != null)
                 {
                     dbPlayer.FirstName = player.FirstName;

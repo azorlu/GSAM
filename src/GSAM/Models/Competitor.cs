@@ -28,12 +28,16 @@ namespace GSAM.Models
         [ForeignKey("TournamentEventID")]
         public TournamentEvent TournamentEvent { get; set; }
 
-        public Competitor(int tournamentEventID, int firstPlayerID, int secondPlayerID = 0)
+        [ForeignKey("FirstPlayerID")]
+        public Player FirstPlayer { get; set; }
+
+        [ForeignKey("SecondPlayerID")]
+        public Player SecondPlayer { get; set; }
+
+        public Competitor()
         {
-            TournamentEventID = tournamentEventID;
-            FirstPlayerID = firstPlayerID;
-            SecondPlayerID = secondPlayerID;
         }
 
+        // TODO: add seed number property
     }
 }

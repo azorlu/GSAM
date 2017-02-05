@@ -36,6 +36,12 @@
                         Delete
                     </button>
                 </form>
+
+                <a asp-controller="CompetitorAdmin" asp-action="List" class="btn btn-sm btn-warning"
+                   asp-route-tournamentEventID="@e.TournamentEventID">
+                    Manage Competitors
+                </a>
+
             </td>
         </tr>
     }

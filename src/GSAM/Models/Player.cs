@@ -32,5 +32,10 @@ namespace GSAM.Models
 
         public string FullName => $"{FirstName} {LastName}";
         public int Age => DateOfBirth.HasValue ? Convert.ToInt32(DateTime.Today.Subtract(DateOfBirth.Value).TotalDays / 365.2425D) : 0;
+
+        public Player()
+        {
+        }
+
     }
 }

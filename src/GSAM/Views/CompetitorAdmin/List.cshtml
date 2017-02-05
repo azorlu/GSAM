@@ -1,0 +1,47 @@
+﻿@model CompetitorsListViewModel
+@{
+    ViewBag.Title = "Competitor List";
+    Layout = "_AdminLayout";
+}
+
+@Html.Partial("TournamentEventSummary", Model.TournamentEvent)
+
+    <table class="table table-striped table-bordered table-condensed">
+        <tr>
+            <th class="text-right">Competitor ID</th>
+            <th class="text-left">Player(s)</th>
+            <th class="text-center">Actions</th>
+        </tr>
+        @foreach (var c in Model.Competitors)
+        {
+        <tr>
+            <td class="text-right">@c.CompetitorID</td>
+            <td class="text-left">@c.FirstPlayer.FullName</td>
+            <td class="text-center">
+                <form asp-action="Delete" method="post">
+                    <a asp-action="Edit" class="btn btn-sm btn-warning"
+                       asp-route-competitorID="@c.CompetitorID"
+                       asp-route-tournamentEventID="@c.TournamentEventID">
+                        Edit
+                    </a>
+                    <input type="hidden" name="CompetitorID" value="@c.CompetitorID" />
+                    <button type="submit" class="btn btn-danger btn-sm">
+                        Delete
+                    </button>
+                </form>
+            </td>
+        </tr>
+        }
+    </table>
+
+    <div page-model="@Model.PagingInfo" page-action="List" page-classes-enabled="true"
+         page-class="btn" page-class-normal="btn-default"
+         page-class-selected="btn-primary" class="btn-group pull-left">
+    </div>
+
+<div class="text-right">
+    <a asp-action="Create" class="btn btn-primary"
+       asp-route-tournamentEventID="@Model.TournamentEvent.TournamentEventID">
+        Add Competitor
+    </a>
+</div>

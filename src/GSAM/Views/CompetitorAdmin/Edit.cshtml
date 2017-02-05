@@ -1,0 +1,31 @@
+﻿@model Competitor
+@{
+    ViewBag.Title = "Competitor";
+    Layout = "_AdminLayout";
+}
+
+@Html.Partial("TournamentEventSummary", Model.TournamentEvent)
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="CompetitorID" />
+    <input type="hidden" asp-for="TournamentEventID" />
+    <div class="form-group">
+        <span>First Player</span>
+        <select asp-for="FirstPlayerID"
+                asp-items="@ViewBag.PlayersList">
+            <option>Please select player</option>
+        </select>
+        <div><span asp-validation-for="FirstPlayerID" class="text-danger"></span></div>
+    </div>
+
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">Save</button>
+        <a asp-action="List" asp-route-tournamentEventID="@Model.TournamentEventID"
+           class="btn btn-default">Cancel</a>
+    </div>
+</form>
+
+
+
+
+

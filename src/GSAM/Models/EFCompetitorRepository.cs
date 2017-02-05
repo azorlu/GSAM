@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,7 +13,19 @@ namespace GSAM.Models
         {
             context = adc;
         }
-        public IEnumerable<Competitor> Competitors => context.Competitors;
+        public IEnumerable<Competitor> Competitors
+        {
+            get
+            {
+                IEnumerable<Competitor> competitors = context.Competitors
+                .Include(c => c.TournamentEvent)
+                .Include(c => c.FirstPlayer);
+                //.Include(c => c.SecondPlayer); // TODO :: Include optional foreign key
+
+                return competitors;
+            }
+        }
+            
 
         public Competitor DeleteCompetitor(int competitorID)
         {

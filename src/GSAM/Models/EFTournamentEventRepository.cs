@@ -13,7 +13,9 @@ namespace GSAM.Models
         {
             context = adc;
         }
-        public IEnumerable<TournamentEvent> TournamentEvents => context.TournamentEvents.Include(e => e.Tournament);
+        public IEnumerable<TournamentEvent> TournamentEvents => context.TournamentEvents
+                                                        .Include(e => e.Tournament)
+                                                        .Include(e => e.Competitors);
 
         public TournamentEvent DeleteTournamentEvent(int tournamentEventID)
         {

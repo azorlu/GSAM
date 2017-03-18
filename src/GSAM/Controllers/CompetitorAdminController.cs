@@ -98,8 +98,11 @@ namespace GSAM.Controllers
 
         private void GeneratePlayersSelectList(int tournamentEventID)
         {
-            // TODO: filter out player ids already in the competitors list
+            // Filter out player ids already in the competitors list
+            var alreadyAdded = GetCompetingPlayerIDs(GetTournamentEvent(tournamentEventID));
+
             ViewBag.PlayersList = playerRepository.Players
+                .Where(p => !alreadyAdded.Contains(p.PlayerID))
                 .OrderBy(p => p.FullName)
                 .Select(p => new SelectListItem()
                 {
@@ -112,6 +115,17 @@ namespace GSAM.Controllers
         {
             return parentRepository.TournamentEvents
                 .FirstOrDefault(e => e.TournamentEventID == tournamentEventID);
+        }
+
+        private HashSet<int> GetCompetingPlayerIDs(TournamentEvent tournamentEvent)
+        {
+            var playerIDs = new HashSet<int>();
+            foreach(Competitor c in tournamentEvent.Competitors)
+            {
+                playerIDs.Add(c.FirstPlayerID);
+                playerIDs.Add(c.SecondPlayerID);
+            }
+            return playerIDs;
         }
 
     }

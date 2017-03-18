@@ -26,7 +26,6 @@ namespace GSAM.Models
             }
         }
             
-
         public Competitor DeleteCompetitor(int competitorID)
         {
             Competitor dbEntry = FindCompetitorByID(competitorID);

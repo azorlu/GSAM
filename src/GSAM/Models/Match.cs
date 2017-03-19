@@ -36,8 +36,8 @@ namespace GSAM.Models
         [DisplayName("Completed")]
         public bool Completed { get; set; }
 
-        [DisplayName("Winner")]
-        public Competitor Winner { get; set; }
+        [DisplayName("Winner ID")]
+        public int WinnerID { get; set; }
 
         [DisplayName("Loser Retired")]
         public bool LoserRetired { get; set; }

@@ -17,5 +17,7 @@ namespace GSAM.Models
 
         public DbSet<Competitor> Competitors { get; set; }
 
+        public DbSet<Round> Rounds { get; set; }
+
     }
 }

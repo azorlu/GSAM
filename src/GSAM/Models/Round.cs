@@ -15,8 +15,10 @@ namespace GSAM.Models
         [DisplayName("Tournament Event ID")]
         public int TournamentEventID { get; set; }
 
-        [DisplayName("Competitor Count")]
-        public int CompetitorCount { get; set; }
+        [DisplayName("Round Number")]
+        public int RoundNumber { get; set; }
+
+        // to-do :: get competitor count from db (round of 16, semi-final etc.)
 
         public Round()
         {
